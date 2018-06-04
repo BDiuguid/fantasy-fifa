@@ -23,6 +23,23 @@ async function savePlayer(player) {
 }
 
 async function importPlayerData() {
+  try {
+    const players = await getAllPlayers();
+    const mappedPlayers = players.map(fifaPlayerToGraphQLPlayer);
+    await asyncForEach(mappedPlayers, async (player, i) => {
+      console.log(`Seeding player ${i} of ${mappedPlayers.length}`);
+      logPlayer(player);
+      await duration({ milliseconds: 200 });
+      await savePlayer(mappedPlayers[i]);
+    });
+
+    console.log(`FINISHED SAVING PLAYERS!`);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function getAllPlayers() {
   const params = {
     page: 1,
     quality: 'bronze,silver,gold,rare_bronze,rare_silver,rare_gold',
@@ -46,16 +63,7 @@ async function importPlayerData() {
     }
 
     const dedupedPlayers = dedupePlayers(players);
-    const mappedPlayers = dedupedPlayers.map(fifaPlayerToGraphQLPlayer);
-
-    await asyncForEach(mappedPlayers, async (mappedPlayer, i) => {
-      console.log(`Seeding player ${i} of ${mappedPlayers.length}`);
-      logPlayer(mappedPlayer);
-      await duration({ milliseconds: 200 });
-      await savePlayer(mappedPlayers[i]);
-    });
-
-    console.log(`FINISHED SAVING PLAYERS!`);
+    return dedupedPlayers;
   } catch (e) {
     console.error(e);
   }
@@ -207,6 +215,7 @@ function fifaPlayerToGraphQLPlayer(fifaPlayer) {
 
 module.exports = {
   importPlayerData,
+  getAllPlayers,
 };
 
 // const ExampleRequest = {
