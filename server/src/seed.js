@@ -6,31 +6,23 @@ const { getPrisma } = require('./prisma');
 const url =
   'https://www.easports.com/fifa/ultimate-team/api/fut/item?jsonParamObject=';
 
-// An example request object is commented out at the bottom of this file.
-async function fetchData(url, params) {
-  return fetch(`${url}${JSON.stringify(params)}`).then(res => res.json());
-}
+// An example response object is commented out at the bottom of this file.
+const fetchData = async (url, params) =>
+  fetch(`${url}${JSON.stringify(params)}`).then(res => res.json());
 
-async function savePlayer(player) {
-  const prisma = getPrisma();
+const prisma = getPrisma();
 
-  return prisma.mutation.createPlayer(
-    {
-      data: player,
-    },
-    `{ id }`
-  );
-}
+const savePlayer = async player =>
+  prisma.mutation.createPlayer({ data: player }, `{ id }`);
 
 async function importPlayerData() {
   try {
-    const players = await getAllPlayers();
-    const mappedPlayers = players.map(fifaPlayerToGraphQLPlayer);
-    await asyncForEach(mappedPlayers, async (player, i) => {
-      console.log(`Seeding player ${i} of ${mappedPlayers.length}`);
+    const players = await getAllPlayers(fifaPlayerToGraphQLPlayer);
+    await asyncForEach(players, async (player, i) => {
+      console.log(`Seeding player ${i} of ${players.length}`);
       logPlayer(player);
       await duration({ milliseconds: 200 });
-      await savePlayer(mappedPlayers[i]);
+      await savePlayer(players[i]);
     });
 
     console.log(`FINISHED SAVING PLAYERS!`);
@@ -39,31 +31,56 @@ async function importPlayerData() {
   }
 }
 
-async function getAllPlayers() {
+const POSITIONS = [
+  `LF`,
+  `CF`,
+  `RF`,
+  `ST`,
+  `LW`,
+  `LM`,
+  `CDM`,
+  `CM`,
+  `CAM`,
+  `RM`,
+  `RW`,
+  `LWB`,
+  `LB`,
+  `CB`,
+  `RB`,
+  `RWB`,
+  `GK`,
+];
+
+async function getAllPlayers(
+  mapper,
+  minRating = 77,
+  position = POSITIONS.join(',')
+) {
   const params = {
     page: 1,
-    quality: 'bronze,silver,gold,rare_bronze,rare_silver,rare_gold',
-    position: 'LF,CF,RF,ST,LW,LM,CDM,CM,CAM,RM,RW,LWB,LB,CB,RB,RWB,GK',
-    ovr: '77:99',
+    quality: `bronze,silver,gold,rare_bronze,rare_silver,rare_gold`,
+    position,
+    ovr: `${minRating}:99`,
   };
 
   const players = [];
 
   try {
-    let data;
     const first = await fetchData(url, params);
+    console.log(`Requesting page ${params.page} of ${first.totalPages}`);
 
     players.push(...first.items);
 
     for (let i = 2; i <= first.totalPages; i++) {
       console.log(`Requesting page ${i} of ${first.totalPages}`);
       params.page = i;
-      data = await fetchData(url, params);
+      const data = await fetchData(url, params);
       players.push(...data.items);
     }
 
     const dedupedPlayers = dedupePlayers(players);
-    return dedupedPlayers;
+    const mappedPlayers = dedupedPlayers.map(mapper);
+    return mappedPlayers;
   } catch (e) {
     console.error(e);
   }
