@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withApollo } from 'react-apollo';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import MuiDownshift from 'mui-downshift';
 import styled from 'styled-components';
 import { debounce } from 'lodash';

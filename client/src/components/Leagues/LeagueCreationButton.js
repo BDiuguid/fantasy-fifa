@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import ReactModal from 'react-modal';
 import { compose, withState, withHandlers } from 'recompose';
 import UserQuery from '../UserQuery';

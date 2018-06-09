@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { compose, withHandlers } from 'recompose';
 import { graphql } from 'react-apollo';
 import Player from '../Player';

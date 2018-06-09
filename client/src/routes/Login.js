@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { compose, withState, withHandlers } from 'recompose';
 import { Redirect } from 'react-router';
 import { withApollo, graphql } from 'react-apollo';
