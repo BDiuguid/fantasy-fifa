@@ -7,7 +7,8 @@ import { debounce } from 'lodash';
 import PLAYER_BY_NAME_QUERY from '../graphql/PlayerByNameQuery.graphql';
 
 const ButtonWrapper = styled.div`
-  margin-top: 4px;
+  margin-top: ${props => props.theme.spacing}px;
+  margin-bottom: ${props => props.theme.spacing}px;
 `;
 
 class PlayerPicker extends Component {
@@ -44,9 +45,9 @@ class PlayerPicker extends Component {
     const players = data.playersByName.map(player => ({
       ...player,
       value: player.id,
-      label: `${player.rating} - ${player.position} - ${player.firstName} ${
-        player.lastName
-      } (${player.name})`,
+      label:
+        `${player.rating} - ${player.position} - ` +
+        `${player.name} (${player.firstName} ${player.lastName})`,
     }));
     this.setState({ players, playerLoading: false });
   };

@@ -16,6 +16,7 @@ const theme = {
     fifaOrange: '#D47C00',
     fifaRed: '#BF3030',
   },
+  spacing: 8,
 };
 
 const muiTheme = createMuiTheme({
@@ -33,6 +34,7 @@ const muiTheme = createMuiTheme({
       contrastText: theme.color.secondaryText,
     },
   },
+  spacing: { unit: theme.spacing },
 });
 
 export { theme, muiTheme };

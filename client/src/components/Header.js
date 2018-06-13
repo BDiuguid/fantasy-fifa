@@ -10,9 +10,9 @@ import { AUTH_TOKEN } from '../constants';
 const AppBar = styled.div`
   background-color: ${props => props.theme.color.primaryDark};
   color: ${props => props.theme.color.primaryText};
-  height: 50px;
-  min-height: 50px;
-  padding: 5px 15px;
+  height: ${props => props.theme.spacing * 6}px;
+  padding: ${props => props.theme.spacing / 2}px
+    ${props => props.theme.spacing * 2}px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,7 +27,7 @@ const Menu = styled.div`
 
 const Name = styled.p`
   color: ${props => props.theme.color.secondary};
-  padding: 0 4px;
+  padding: 0 ${props => props.theme.spacing / 2}px;
 `;
 
 const Header = ({ onLogout }) => (

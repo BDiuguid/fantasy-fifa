@@ -11,7 +11,7 @@ const LeagueRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: ${props => props.theme.spacing}px 0;
 `;
 
 const getStatusText = status => {
