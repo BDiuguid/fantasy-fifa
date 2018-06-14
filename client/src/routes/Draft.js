@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
+import styled from 'styled-components';
 import DraftStartButton from '../components/Draft/DraftStartButton';
 import DraftCurrentBid from '../components/Draft/DraftCurrentBid';
-import DraftBoardUserItem from '../components/Draft/DraftBoardUserItem';
 import DraftPlayerPicker from '../components/Draft/DraftPlayerPicker';
+import DraftTeamList from '../components/Draft/DraftTeamList';
 import LEAGUE_SUBSCRIPTION from '../graphql/LeagueSubscription.graphql';
 import LEAGUE_QUERY from '../graphql/LeagueQuery.graphql';
 
@@ -12,7 +13,7 @@ const leagueStatusText = status => {
     case 'IDLE':
       return 'Awaiting league creator to start.';
     case 'IN_PROGRESS':
-      return 'Draft Underway!';
+      return '';
     case 'PAUSED':
       return 'Draft has been paused.';
     case 'ENDED':
@@ -21,6 +22,13 @@ const leagueStatusText = status => {
       return '';
   }
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 class DraftPage extends Component {
   componentDidMount() {
@@ -31,28 +39,13 @@ class DraftPage extends Component {
     const { loading, data } = this.props;
     return !loading && data && data.league ? (
       <div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Container>
           <p>{leagueStatusText(data.league.status)}</p>
           <DraftStartButton league={data.league} />
-        </div>
+        </Container>
         <DraftCurrentBid league={data.league} />
         <DraftPlayerPicker league={data.league} />
-        <div>
-          {data.league.members.map((member, i) => (
-            <DraftBoardUserItem
-              key={member.id}
-              member={member}
-              team={data.league.teams[i]}
-              teamSize={data.league.teamSize}
-            />
-          ))}
-        </div>
+        <DraftTeamList league={data.league} />
       </div>
     ) : null;
   }
