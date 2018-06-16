@@ -1,7 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 import { graphql } from 'react-apollo';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { compose, withState, withHandlers } from 'recompose';
 import CREATE_LEAGUE_MUTATION from '../../graphql/CreateLeagueMutation.graphql';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+`;
 
 const Form = ({
   done,
@@ -19,82 +30,80 @@ const Form = ({
   bidTime,
   onChangeBidTime,
 }) => (
-  <form className="leagueCreationForm" onSubmit={onSubmit}>
-    <div>
-      <label htmlFor="leagueName">League name</label>
-      <input
-        type="text"
-        id="leagueName"
+  <form onSubmit={onSubmit} style={{ height: '80%' }}>
+    <Container>
+      <TextField
+        label="League Name"
         value={name}
         onChange={onChangeName}
         placeholder="e.g., Romeo Rumble"
-        maxLength="30"
+        inputProps={{ maxLength: '30' }}
       />
-    </div>
-    <div>
-      <label htmlFor="leagueMaxSize">Max League Size</label>
-      <input
+      <TextField
+        label="Max League Size"
         type="number"
-        min="2"
-        max="128"
-        step="1"
         value={maxSize}
         onChange={onChangeMaxSize}
-        id="leagueMaxSize"
+        inputProps={{
+          min: '2',
+          max: '128',
+          step: '1',
+        }}
       />
-    </div>
-    <div>
-      <label htmlFor="maxTeamSize">Max Team Size</label>
-      <input
+      <TextField
+        label="Max Team Size"
         type="number"
-        min="1"
-        max="100"
-        step="1"
         value={teamSize}
         onChange={onChangeTeamSize}
-        id="maxTeamSize"
+        inputProps={{
+          min: '1',
+          max: '100',
+          step: '1',
+        }}
       />
-    </div>
-    <div>
-      <label htmlFor="auctionStartingMoney">Starting Auction Money</label>
-      <input
+      <TextField
+        label="Starting Auction Money"
         type="number"
-        min="1"
-        step="1"
         value={startingMoney}
         onChange={onChangeStartingMoney}
-        id="auctionStartingMoney"
+        inputProps={{
+          min: '1',
+          step: '1',
+        }}
       />
-    </div>
-    <div>
-      <label htmlFor="timeBetweenNomination">Time Between Nomination</label>
-      <input
+      <TextField
+        label="Time Between Nomination"
         type="number"
-        min="5"
-        step="1"
         value={nominationTime}
         onChange={onChangeNominationTime}
-        id="timeBetweenNomination"
+        inputProps={{
+          min: '5',
+          step: '1',
+        }}
       />
-    </div>
-    <div>
-      <label htmlFor="bidTime">Bid Time</label>
-      <input
+      <TextField
+        label="Bid Time"
         type="number"
-        min="5"
-        step="1"
         value={bidTime}
         onChange={onChangeBidTime}
-        id="bidTime"
+        inputProps={{
+          min: '5',
+          step: '1',
+        }}
       />
-    </div>
-
-    <button type="submit" className="btn btn-primary">
+      <Button type="submit" variant="contained" color="primary">
+        Submit
+      </Button>
+      <Button variant="contained" onClick={done}>
+        Close
+      </Button>
+      {/* <button type="submit" className="btn btn-primary">
       Submit
     </button>
     <button type="button" className="btn btn-default" onClick={done}>
       Close
-    </button>
+    </button> */}
+    </Container>
   </form>
 );
 
