@@ -1,5 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import { compose, withState, withHandlers } from 'recompose';
 import { Redirect } from 'react-router';
 import { withApollo, graphql } from 'react-apollo';
@@ -7,6 +9,14 @@ import UserQuery from '../components/UserQuery';
 import SIGNUP_MUTATION from '../graphql/SignupMutation.graphql';
 import LOGIN_MUTATION from '../graphql/LoginMutation.graphql';
 import { AUTH_TOKEN } from '../constants';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  width: 30%;
+  justify-content: space-around;
+`;
 
 const Login = ({
   name,
@@ -19,34 +29,31 @@ const Login = ({
   return localStorage.getItem(AUTH_TOKEN) ? (
     <UserQuery network={true}>{() => <Redirect to="/" />}</UserQuery>
   ) : (
-    <div>
-      <input
-        placeholder="username"
-        value={name}
-        onChange={onChangeName}
-        type="text"
-        style={{
-          color: '#000000',
-          maxWidth: '80px',
-        }}
-      />
-      <input
-        placeholder="password"
+    <Container>
+      <TextField label="Username" value={name} onChange={onChangeName} />
+      <TextField
+        label="Password"
+        type="password"
         value={password}
         onChange={onChangePassword}
-        type="password"
-        style={{
-          color: '#000000',
-          maxWidth: '80px',
-        }}
       />
-      <Button size="small" onClick={onLogin}>
+      <Button
+        size="large"
+        variant="contained"
+        color="primary"
+        onClick={onLogin}
+      >
         Login
       </Button>
-      <Button size="small" onClick={onSignup}>
+      <Button
+        size="large"
+        variant="contained"
+        color="primary"
+        onClick={onSignup}
+      >
         Sign Up
       </Button>
-    </div>
+    </Container>
   );
 };
 
