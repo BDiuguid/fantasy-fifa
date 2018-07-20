@@ -97,7 +97,7 @@ const enhanced = compose(
           password,
         },
       });
-      localStorage.setItem(AUTH_TOKEN, result.data.login.token);
+      localStorage.setItem(AUTH_TOKEN, result.data.signup.token);
       changeName('');
       changePassword('');
     },

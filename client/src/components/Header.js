@@ -11,6 +11,7 @@ const AppBar = styled.div`
   background-color: ${props => props.theme.color.primaryDark};
   color: ${props => props.theme.color.primaryText};
   height: ${props => props.theme.spacing * 6}px;
+  min-height: ${props => props.theme.spacing * 6}px;
   padding: ${props => props.theme.spacing / 2}px
     ${props => props.theme.spacing * 2}px;
   display: flex;
