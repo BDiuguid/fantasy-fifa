@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import getClient from './client';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -14,7 +14,7 @@ import { theme, muiTheme } from './theme';
 
 const client = getClient();
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   html,
   body,
   #root {
@@ -36,6 +36,7 @@ render(
     <ThemeProvider theme={theme}>
       <MuiThemeProvider theme={muiTheme}>
         <CssBaseline />
+        <GlobalStyle />
         <ToastProvider>
           <Routes />
         </ToastProvider>
