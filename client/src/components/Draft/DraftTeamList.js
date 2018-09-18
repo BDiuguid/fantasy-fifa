@@ -46,13 +46,16 @@ const Team = ({ member, team, teamSize }) => (
   </Container>
 );
 
+const teamByOwner = (ownerId, teams) =>
+  teams.filter(t => t.owner.id === ownerId)[0];
+
 const DraftTeamList = ({ league }) => (
   <Flex>
-    {league.members.map((member, i) => (
+    {league.members.map(member => (
       <Team
         key={member.id}
         member={member}
-        team={league.teams[i]}
+        team={teamByOwner(member.id, league.teams)}
         teamSize={league.teamSize}
       />
     ))}
