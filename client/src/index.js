@@ -7,6 +7,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import getClient from './client';
 import registerServiceWorker from './registerServiceWorker';
 
+import Catch from './components/Catch';
 import Routes from './routes';
 
 import { ToastProvider } from './components/Toast';
@@ -32,17 +33,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 render(
-  <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <MuiThemeProvider theme={muiTheme}>
-        <CssBaseline />
-        <GlobalStyle />
-        <ToastProvider>
-          <Routes />
-        </ToastProvider>
-      </MuiThemeProvider>
-    </ThemeProvider>
-  </ApolloProvider>,
+  <Catch>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <MuiThemeProvider theme={muiTheme}>
+          <CssBaseline />
+          <GlobalStyle />
+          <ToastProvider>
+            <Routes />
+          </ToastProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
+    </ApolloProvider>
+  </Catch>,
   document.getElementById('root')
 );
 
