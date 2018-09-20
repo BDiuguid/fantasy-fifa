@@ -4,6 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
+    "test": "jest",
     "debug": "node src/index.js --inspect",
     "playground": "graphql playground",
     "prisma": "prisma"
@@ -24,6 +25,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.10.0",
     "graphql-cli": "^2.16.2",
+    "jest": "^23.6.0",
     "npm-run-all": "^4.1.2",
     "prisma": "^1.5.3"
   }

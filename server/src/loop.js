@@ -265,4 +265,5 @@ function getIndexOfTurnOrderFromId(userId, league) {
 
 module.exports = {
   startLoop,
+  processBid,
 };
