@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "jest",
+    "test:watch": "jest --watch",
     "debug": "node src/index.js --inspect",
     "playground": "graphql playground",
     "prisma": "prisma"
