@@ -37,6 +37,22 @@ const loopSelection = `
     }
   }`;
 
+// Shuffle array of ids, then unpack that by the teamSize.
+// I.e., shuffle: [BEN, ZACH, WALT] TeamSize: 3
+// [BEN, ZACH, WALT, BEN, ZACH, WALT, BEN, ZACH, WALT]
+// Simply pop off the first element after every bid.
+// Because it's an auction, ben could take first 3 players.
+// When a member is full, filter them out, i.e., Ben takes first 3:
+// [ZACH, WALT, ZACH, WALT]
+// End when empty.
+
+// BENEFITS
+// Remove userTurnIndex and it's horrible logic
+// Easy to display full order
+// CONS
+// Rewrite tests
+// Manually test everything
+
 async function startLoop(leagueId) {
   console.log(`Starting Loop!`);
   const prisma = getPrisma();
