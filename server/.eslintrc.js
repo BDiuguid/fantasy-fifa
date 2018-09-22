@@ -2,11 +2,12 @@ module.exports = {
   env: {
     node: true,
     es6: true,
+    'jest/globals': true,
   },
   parserOptions: {
     ecmaVersion: 2018,
   },
-  plugins: ['import'],
+  plugins: ['import', 'jest'],
   extends: ['eslint:recommended', 'prettier'],
   rules: {
     'no-unused-vars': 'off',
