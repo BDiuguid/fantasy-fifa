@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "graphql": "^0.13.2",
-    "graphql-yoga": "1.12.1",
+    "graphql": "^14.0.2",
+    "graphql-yoga": "^1.16.2",
     "jsonwebtoken": "^8.2.0",
     "lodash": "^4.17.5",
     "node-fetch": "^2.1.2",
-    "prisma-binding": "^1.5.16"
+    "prisma-binding": "^2.1.6"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
-    "dotenv": "^5.0.1",
+    "babel-eslint": "^10.0.1",
+    "dotenv": "^6.0.0",
     "eslint": "^5.6.0",
-    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jest": "^21.22.1",
     "graphql-cli": "^2.16.2",
