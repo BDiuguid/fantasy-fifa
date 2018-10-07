@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import ContentCopy from '@material-ui/icons/ContentCopy';
+import FileCopy from '@material-ui/icons/FileCopy';
 import { compose, withHandlers } from 'recompose';
 import { range } from 'lodash';
 import { graphql } from 'react-apollo';
@@ -48,12 +48,12 @@ const DraftStartButton = ({ league, startDraft }) => (
           </Button>
         ) : league.status === 'ENDED' ? (
           <Button variant="fab" color="secondary" onClick={() => copy(league)}>
-            <ContentCopy />
+            <FileCopy />
           </Button>
         ) : null
       ) : league.status === 'ENDED' ? (
         <Button variant="fab" color="secondary" onClick={() => copy(league)}>
-          <ContentCopy />
+          <FileCopy />
         </Button>
       ) : null
     }
