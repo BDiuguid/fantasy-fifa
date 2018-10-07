@@ -5,10 +5,12 @@ import TextField from '@material-ui/core/TextField';
 import { compose, withState, withHandlers } from 'recompose';
 import { Redirect } from 'react-router';
 import { withApollo, graphql } from 'react-apollo';
+import { loader } from 'graphql.macro';
 import UserQuery from '../components/UserQuery';
-import SIGNUP_MUTATION from '../graphql/SignupMutation.graphql';
-import LOGIN_MUTATION from '../graphql/LoginMutation.graphql';
 import { AUTH_TOKEN } from '../constants';
+
+const SIGNUP_MUTATION = loader('../graphql/SignupMutation.graphql');
+const LOGIN_MUTATION = loader('../graphql/LoginMutation.graphql');
 
 const Container = styled.div`
   display: flex;

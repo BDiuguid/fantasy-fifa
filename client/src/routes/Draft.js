@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
+import { loader } from 'graphql.macro';
 import DraftStartButton from '../components/Draft/DraftStartButton';
 import DraftCurrentBid from '../components/Draft/DraftCurrentBid';
 import DraftPlayerPicker from '../components/Draft/DraftPlayerPicker';
 import DraftTeamList from '../components/Draft/DraftTeamList';
-import LEAGUE_SUBSCRIPTION from '../graphql/LeagueSubscription.graphql';
-import LEAGUE_QUERY from '../graphql/LeagueQuery.graphql';
+
+const LEAGUE_SUBSCRIPTION = loader('../graphql/LeagueSubscription.graphql');
+const LEAGUE_QUERY = loader('../graphql/LeagueQuery.graphql');
 
 const leagueStatusText = status => {
   switch (status) {

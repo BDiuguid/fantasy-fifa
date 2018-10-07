@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { compose, withHandlers } from 'recompose';
 import { graphql } from 'react-apollo';
+import { loader } from 'graphql.macro';
 import Player from '../Player';
 import UserQuery from '../UserQuery';
-import BID_ON_PLAYER_MUTATION from '../../graphql/BidOnPlayerMutation.graphql';
+
+const BID_ON_PLAYER_MUTATION = loader(
+  '../../graphql/BidOnPlayerMutation.graphql'
+);
 
 const userIsInDraft = (league, user) =>
   user && league.members.find(m => m.id === user.id);

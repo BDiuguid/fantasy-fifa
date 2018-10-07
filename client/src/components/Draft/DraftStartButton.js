@@ -4,8 +4,10 @@ import ContentCopy from '@material-ui/icons/ContentCopy';
 import { compose, withHandlers } from 'recompose';
 import { range } from 'lodash';
 import { graphql } from 'react-apollo';
+import { loader } from 'graphql.macro';
 import UserQuery from '../UserQuery';
-import START_DRAFT_MUTATION from '../../graphql/StartDraftMutation.graphql';
+
+const START_DRAFT_MUTATION = loader('../../graphql/StartDraftMutation.graphql');
 
 const copy = league => {
   let csvBuilder = '';

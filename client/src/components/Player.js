@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
-import PLAYER_QUERY from '../graphql/PlayerQuery.graphql';
+import { loader } from 'graphql.macro';
+
+const PLAYER_QUERY = loader('../graphql/PlayerQuery.graphql');
 
 const getSkillColor = (skillValue, themeColor) => {
   if (skillValue > 80) return themeColor.fifaDarkGreen;

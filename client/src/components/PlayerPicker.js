@@ -4,7 +4,9 @@ import Button from '@material-ui/core/Button';
 import MuiDownshift from 'mui-downshift';
 import styled from 'styled-components';
 import { debounce } from 'lodash';
-import PLAYER_BY_NAME_QUERY from '../graphql/PlayerByNameQuery.graphql';
+import { loader } from 'graphql.macro';
+
+const PLAYER_BY_NAME_QUERY = loader('../graphql/PlayerByNameQuery.graphql');
 
 const ButtonWrapper = styled.div`
   margin-top: ${props => props.theme.spacing}px;

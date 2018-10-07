@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { withApollo } from 'react-apollo';
+import { loader } from 'graphql.macro';
 import { ToastConsumer } from '../Toast';
 import UserQuery from '../UserQuery';
-import NOMINATE_PLAYER_MUTATION from '../../graphql/NominatePlayerMutation.graphql';
 import PlayerPicker from '../PlayerPicker';
+
+const NOMINATE_PLAYER_MUTATION = loader(
+  '../../graphql/NominatePlayerMutation.graphql'
+);
 
 class DraftPicker extends Component {
   onPick = async player => {

@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import LeagueItem from './LeagueItem';
 import { Query } from 'react-apollo';
-import LEAGUES_QUERY from '../../graphql/LeaguesQuery.graphql';
+import { loader } from 'graphql.macro';
+
+const LEAGUES_QUERY = loader('../../graphql/LeaguesQuery.graphql');
 
 const leagues = () => (
   <Query query={LEAGUES_QUERY}>

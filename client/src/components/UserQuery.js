@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
-import USER_QUERY from '../graphql/UserQuery.graphql';
+import { loader } from 'graphql.macro';
 import { AUTH_TOKEN } from '../constants';
+
+const USER_QUERY = loader('../graphql/UserQuery.graphql');
 
 const UserQuery = ({ children, network }) => {
   return (

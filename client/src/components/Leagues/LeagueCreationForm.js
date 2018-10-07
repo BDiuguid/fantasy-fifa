@@ -4,7 +4,11 @@ import { graphql } from 'react-apollo';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { compose, withState, withHandlers } from 'recompose';
-import CREATE_LEAGUE_MUTATION from '../../graphql/CreateLeagueMutation.graphql';
+import { loader } from 'graphql.macro';
+
+const CREATE_LEAGUE_MUTATION = loader(
+  '../../graphql/CreateLeagueMutation.graphql'
+);
 
 const Container = styled.div`
   display: flex;

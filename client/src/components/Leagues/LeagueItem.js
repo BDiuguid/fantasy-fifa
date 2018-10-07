@@ -3,9 +3,11 @@ import Link from '../styles/Link';
 import { compose, withHandlers } from 'recompose';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
+import { loader } from 'graphql.macro';
 import LeagueJoinButton from './LeagueJoinButton';
 import UserQuery from '../UserQuery';
-import JOIN_LEAGUE_MUTATION from '../../graphql/JoinLeagueMutation.graphql';
+
+const JOIN_LEAGUE_MUTATION = loader('../../graphql/JoinLeagueMutation.graphql');
 
 const LeagueRow = styled.div`
   display: flex;
@@ -38,9 +40,7 @@ const LeagueItem = ({ league, joinLeague }) => (
             {league.name}
           </Link>
           <p>
-            {league.members.length}
-            /
-            {league.maxSize} Spots
+            {league.members.length}/{league.maxSize} Spots
           </p>
           <p>{getStatusText(league.status)}</p>
           <LeagueJoinButton
